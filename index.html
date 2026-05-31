@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -792,8 +792,9 @@ footer{background:var(--deep);border-top:1px solid var(--b1);padding:3.5rem 2rem
         <div class="f-group"><label>Email Address</label><input type="email" id="fe" placeholder="priya@gmail.com"></div>
         <div class="f-group"><label>Phone Number</label><input type="tel" id="fp" placeholder="+91 98765 43210"></div>
         <div class="f-group"><label>College / University</label>
-          <input list="collegeList" type="text" id="fc" class="payment-card-input" placeholder="Start typing to search and select your college (e.g. Galgotias, KCC, MIET)" />
-          <datalist id="collegeList"></datalist>
+          <select id="fc" class="payment-card-input">
+            <option value="" disabled selected>Select your college / university</option>
+          </select>
         </div>
         <div class="f-row">
           <div class="f-group"><label>Course</label><select id="fco"><option value="">Select Course</option><option>B.Tech CSE</option><option>B.Tech IT</option><option>BCA</option><option>MCA</option><option>B.Sc CS</option><option>Other Engineering</option></select></div>
@@ -1355,9 +1356,12 @@ function populateCollegeDatalist(){
     'JSS Academy', 'Maharishi Dayanand University', 'Indraprastha Institute of Information Technology', 'Delhi University',
     'JIET Group', 'SRM University', 'Vellore Institute of Technology', 'Other College'
   ];
-  const dl = document.getElementById('collegeList');
-  if(!dl) return;
-  dl.innerHTML = colleges.map(c=>`<option value="${c}"></option>`).join('');
+  const select = document.getElementById('fc');
+  if(!select) return;
+  select.innerHTML = [
+    '<option value="" disabled selected>Select your college / university</option>',
+    ...colleges.map(c=>`<option value="${c}">${c}</option>`)
+  ].join('');
 }
 
 function handleSubmit(){
